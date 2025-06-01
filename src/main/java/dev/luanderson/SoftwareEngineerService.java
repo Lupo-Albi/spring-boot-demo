@@ -1,8 +1,8 @@
 package dev.luanderson;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SoftwareEngineerService {
@@ -22,6 +22,21 @@ public class SoftwareEngineerService {
     }
 
     public SoftwareEngineer getSoftwareEngineerById(Integer id) {
-        return softwareEngineerRepository.findById(id).orElseThrow(() -> new IllegalStateException(id + " not found"));
+        return softwareEngineerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " not found"));
+    }
+
+    public void deleteSoftwareEngineerById(Integer id) {
+        softwareEngineerRepository.deleteById(id);
+    }
+
+    public SoftwareEngineer updateSoftwareEngineerById(Integer id, SoftwareEngineer softwareEngineerUpdateData) {
+        SoftwareEngineer softwareEngineerToUpdate = softwareEngineerRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id + " not found"));
+        softwareEngineerToUpdate
+                .setName(softwareEngineerUpdateData.getName());
+        softwareEngineerToUpdate
+                .setTechStack(softwareEngineerUpdateData.getTechStack());
+        return softwareEngineerRepository.save(softwareEngineerToUpdate);
     }
 }

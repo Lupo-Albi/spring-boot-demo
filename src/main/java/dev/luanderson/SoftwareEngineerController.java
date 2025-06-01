@@ -36,6 +36,14 @@ public class SoftwareEngineerController {
     }
 
     // TODO: implement the feature to delete software engineer by id
+    @DeleteMapping("{id}")
+    public void deleteSoftwareEngineerById(@PathVariable Integer id) {
+        softwareEngineerService.deleteSoftwareEngineerById(id);
+    }
 
     // TODO: implement the feature to update software engineer by id
+    @PutMapping("{id}")
+    public SoftwareEngineer updateSoftwareEngineerById(@PathVariable Integer id, @RequestBody SoftwareEngineer softwareEngineerUpdate) {
+        return softwareEngineerService.updateSoftwareEngineerById(id, softwareEngineerUpdate);
+    }
 }
