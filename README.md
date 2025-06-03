@@ -63,7 +63,7 @@ Before running this application, make sure you have the following installed:
    ```
    This will start a PostgreSQL container with the following configuration:
    - Container name: `postgres-spring-boot`
-   - Database user: `your-database-user`
+   - Database user: `luandersondev`
    - Database password: `password`
    - Port: `5332` (mapped to container's 5432)
 
@@ -92,7 +92,7 @@ The `application.properties` file should be configured as follows:
 ```properties
 # Database Configuration
 spring.datasource.url=jdbc:postgresql://localhost:5332/postgres
-spring.datasource.username=your-database-user
+spring.datasource.username=luandersondev
 spring.datasource.password=password
 spring.datasource.driver-class-name=org.postgresql.Driver
 
@@ -102,13 +102,15 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 ```
 
+> ℹ️ You can customize the database username (and password) in `application.properties` and `docker-compose.yml`. Ensure all references in the project match your chosen credentials.
+
 ### Environment Variables
 
 For production deployment, consider using environment variables:
 
 ```bash
 export DB_URL=jdbc:postgresql://localhost:5332/postgres
-export DB_USERNAME=your-database-user
+export DB_USERNAME=luandersondev
 export DB_PASSWORD=password
 ```
 
@@ -150,13 +152,13 @@ To access the PostgreSQL database directly:
 
 ```bash
 # Connect to the database
-docker exec -it postgres-spring-boot psql -U your-database-user -d postgres
+docker exec -it postgres-spring-boot psql -U luandersondev -d postgres
 
 # Or using a database client with these connection details:
 # Host: localhost
 # Port: 5332
 # Database: postgres
-# Username: your-database-user
+# Username: luandersondev
 # Password: password
 ```
 
@@ -179,6 +181,11 @@ You can test the API endpoints using tools like:
 | POST   | `/software-engineers` | Create new entity |
 | PUT    | `/software-engineers/{id}` | Update entity by ID |
 | DELETE | `/software-engineers/{id}` | Delete entity by ID |
+
+The repository includes a `request.http` file for easy API testing. You can:
+
+- Run requests directly (if using IDEs like IntelliJ IDEA or VS Code with the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension).
+- Use it as a reference to manually craft requests in tools like Postman or cURL.
 
 ### Example Requests
 
